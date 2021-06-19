@@ -10,27 +10,28 @@ def public_apis():
     """A CLI wrapper for the API of Public APIs."""
 
 @public_apis.command()
-@click.option('-a', '--no-auth', is_flag=True, help='Filter out APIs with required auth')
-@click.option('-t', '--title_name', default='', help='Name of API (matches via substring - i.e. "at" would return "cat" and "atlas".')
+@click.argument('title')
+@click.option('-a', '--auth', default='', help='Filter out APIs with required auth')
 @click.option('-c', '--category', default='', help='Name of API (matches via substring - i.e. "at" would return "cat" and "atlas".')
-def get(no_auth: bool, entry_name: str, title: str):
-    """Query GET /entries to the Public APIs."""
-    ENTRY_URL = f'{BASE_URL}/entries'
-    response = requests.get(url=f'{BASE_URL}/{ENTRY_ENDPOINT}')
+def entry(auth: str, category: str, title: str):
+    """uery GET /entries to the Public APIs."""
+    ENTRY_API_ENDPOINT = f'{BASE_URL}/entries'
+    query_payload = {'auth': auth, 'title': title, 'category': category}
+    response = requests.get(ENTRY_API_ENDPOINT, params=query_payload)
     if response.status_code == 200:
         print_response(response)
     else:
-        print(f'Could not get the categories: {response.text}')
+        print(f'Could not get the entry from the public API resource: {response.text}')
 
 @public_apis.command()
 def random():
     """Query GET /random to the Public APIs."""
-    ENTRY_URL = f'{BASE_URL}/random'
-    response = requests.get(url=ENTRY_URL)
+    RANDOM_API_ENDPOINT = f'{BASE_URL}/random'
+    response = requests.get(url=RANDOM_API_ENDPOINT)
     if response.status_code == 200:
         print_response(response)
     else:
-        print(f'Could not get the categories: {response.text}')
+        print(f'Could not get a random result from the public API resource: {response.text}')
 
 def print_response(response):
     parsed = response.json()
