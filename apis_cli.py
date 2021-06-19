@@ -20,6 +20,11 @@ def entry(no_auth: bool, category: str, title: str):
     else:
         print(f'Could not get the categories: {response.text}')
 
+def generate_query(no_auth, category, title):
+
+    return true
+
+
 @public_apis.command()
 @click.option('-n', '--name', default='', help='Name of Category (matches via substring - i.e. "at" would return "cat" and "atlas".')
 def category(name: str):
