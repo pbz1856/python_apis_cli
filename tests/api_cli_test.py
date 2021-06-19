@@ -20,39 +20,3 @@ def test_find_matching_name(test_categories, name, expected_list, expected_lengt
         result = find_matching_name(test_categories, name)
         assert result == expected_list
         assert len(result) == expected_length
-
-
-    """
-    {
-        "count": 3,
-        "entries": [
-            {
-            "API": "7Timer!",
-            "Description": "Weather, especially for Astroweather",
-            "Auth": "",
-            "HTTPS": false,
-            "Cors": "unknown",
-            "Link": "http://www.7timer.info/doc.php?lang=en",
-            "Category": "Weather"
-            },
-            {
-            "API": "AccuWeather",
-            "Description": "Weather and forecast data",
-            "Auth": "apiKey",
-            "HTTPS": false,
-            "Cors": "unknown",
-            "Link": "https://developer.accuweather.com/apis",
-            "Category": "Weather"
-            },
-            {
-            "API": "ODWeather",
-            "Description": "Weather and weather webcams",
-            "Auth": "",
-            "HTTPS": false,
-            "Cors": "unknown",
-            "Link": "http://api.oceandrivers.com/static/docs.html",
-            "Category": "Weather"
-            }
-        ]
-    }
-    """

@@ -23,6 +23,10 @@ def entry(auth: str, category: str, title: str):
     else:
         print(f'Could not get the entry from the public API resource: {response.text}')
 
+def print_response(response):
+    parsed = response.json()
+    click.echo(json.dumps(parsed, indent=2, sort_keys=True))
+
 @public_apis.command()
 def random():
     """Query GET /random to the Public APIs."""
@@ -32,10 +36,6 @@ def random():
         print_response(response)
     else:
         print(f'Could not get a random result from the public API resource: {response.text}')
-
-def print_response(response):
-    parsed = response.json()
-    click.echo(json.dumps(parsed, indent=2, sort_keys=True))
 
 @public_apis.command()
 @click.option('-n', '--name', default='', help='Name of Category (matches via substring - i.e. "at" would return "cat" and "atlas".')
